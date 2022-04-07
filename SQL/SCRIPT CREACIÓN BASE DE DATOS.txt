@@ -1,0 +1,111 @@
+-- MySQL Workbench Forward Engineering
+CREATE DATABASE entregasexpress;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema entregasexpress
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema entregasexpress
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `entregasexpress` DEFAULT CHARACTER SET utf8mb4 ;
+USE `entregasexpress` ;
+
+-- -----------------------------------------------------
+-- Table `entregasexpress`.`clientes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `entregasexpress`.`clientes` (
+  `idCliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `documento` VARCHAR(45) NOT NULL,
+  `nombres` VARCHAR(45) NOT NULL,
+  `apellidos` VARCHAR(45) NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `direccion` VARCHAR(45) NOT NULL,
+  `telefono` VARCHAR(45) NOT NULL,
+  `contraseña` VARCHAR(40) NULL DEFAULT NULL,
+  `estado` VARCHAR(20) NULL DEFAULT 'Habilitado',
+  PRIMARY KEY (`idCliente`),
+  UNIQUE INDEX `documento_UNIQUE` (`documento` ASC) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 16
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `entregasexpress`.`roles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `entregasexpress`.`roles` (
+  `idRoles` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombreRol` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idRoles`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `entregasexpress`.`empleados`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `entregasexpress`.`empleados` (
+  `idEmpleado` INT(11) NOT NULL AUTO_INCREMENT,
+  `documento` VARCHAR(45) NOT NULL,
+  `nombres` VARCHAR(45) NOT NULL,
+  `apellidos` VARCHAR(45) NOT NULL,
+  `correo` VARCHAR(45) NOT NULL,
+  `direccion` VARCHAR(45) NOT NULL,
+  `telefono` VARCHAR(45) NOT NULL,
+  `contraseña` VARCHAR(40) NULL DEFAULT NULL,
+  `estado` VARCHAR(20) NOT NULL DEFAULT 'Habilitado',
+  `idRol` INT(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`idEmpleado`),
+  UNIQUE INDEX `documento_UNIQUE` (`documento` ASC) ,
+  INDEX `fk_roles` (`idRol` ASC) ,
+  CONSTRAINT `fk_roles`
+    FOREIGN KEY (`idRol`)
+    REFERENCES `entregasexpress`.`roles` (`idRoles`)
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `entregasexpress`.`pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `entregasexpress`.`pedidos` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Fecha` DATE NOT NULL,
+  `Hora` TIME NOT NULL,
+  `DireccionRecogida` VARCHAR(45) NOT NULL,
+  `DireccionEntrega` VARCHAR(45) NOT NULL,
+  `Descripcion` VARCHAR(60) NOT NULL,
+  `nombreDestinatario` VARCHAR(45) NOT NULL,
+  `telefonoDestinatario` VARCHAR(45) NOT NULL,
+  `valorEnvio` DOUBLE(10,2) NOT NULL,
+  `estado` VARCHAR(45) NOT NULL,
+  `idCliente` INT(11) NOT NULL,
+  `idEmpleado` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Servicio_Cliente1_idx` (`idCliente` ASC) ,
+  INDEX `fk_Servicio_Empleado1_idx` (`idEmpleado` ASC) ,
+  CONSTRAINT `fk_Servicio_Cliente1`
+    FOREIGN KEY (`idCliente`)
+    REFERENCES `entregasexpress`.`clientes` (`idCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Servicio_Empleado1`
+    FOREIGN KEY (`idEmpleado`)
+    REFERENCES `entregasexpress`.`empleados` (`idEmpleado`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -1,0 +1,157 @@
+body{
+    font-family: 'Lobster', cursive;
+    font-family: 'Nunito', sans-serif;
+}
+/* Separamiento en dos parte la pagina login */
+.login-desing{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    height: 100vh; /* Es importate el height para que se represente los colores */
+}
+
+/* En este caso ubicamos la nube izquierda con bases de background */
+.waves{
+    /* Modificacion de la nube izquierda */
+    background-image: url('../assets/wave.png');/* Aginamos la img */
+    background-repeat: no-repeat;/* Evitamos que la imagen se repita */
+    background-size: cover;/* Aginamos que la img siempre se quede del mismo tamoño */
+    background-position: center;/* Asignamos que la imagen siempre este centrada */
+
+    /* Modificacion de la imagen para centralizarla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Fin de lado izquierdo del login */
+
+
+.login{
+    /* Centrar la img tanto horizontal como verticalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-data{
+    /* border: solid; */ /* Se agrego el borde solido para medir las limitaciones en la maquetacion */
+    text-align: center;
+    width: 60%;
+}
+
+.login-data h1{
+    font-weight: 700;
+    font-size: 45px;
+    font-family: Dancing Script, Lobster, sans-serif;
+}
+
+/* Empezamos a darle estilos a los inputs */
+
+.input-group{
+    position: relative;
+    width: 80%;
+    margin: 0 auto;/* Margin 0 auto para que este factor quede centrado siempre */
+    margin-bottom: 1.5rem ;
+}
+
+/* Estilos y cuadrar tamaños de los inputs */
+.input-fill input,select{
+    border: none;
+    border-bottom: 2px solid #848F9A;
+    width: 100%;
+    font-size: 1.0625rem;
+    padding-left: 2rem;
+    line-height: 147.6%;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* PARA TENER TODO ORGANIZADO DE UNA MEJOR MANERA ES MEJOR TENER LAS FUNCIONES DE INTERACTUAR JUNTAS */
+
+/* Realizamos que al interactuar con el input la barra en top cambie de color */
+.input-fill input:focus{
+    outline: none;
+    border-color: #6C1AEF;
+}
+
+.input-fill select:focus{
+    outline: none;
+    border-color: #6C1AEF;
+}
+
+/* Esta funcion sirve para mover elementos a cierta parte cuando el usuario interactua con la funcion */
+.input-fill input:focus + .input-label {
+    top: 0;
+    margin-bottom: 2rem;
+    color: #6C1AEF;
+    transition: .5s;
+}
+
+.input-fill select:focus + .input-label {
+    top: 0;
+    margin-bottom: 2rem;
+    color: #6C1AEF;
+    transition: .5s;
+}
+
+/* Vamos a modificar ahora los incons para que cambien su color al interactuar con el input */
+.input-fill input:focus ~ i{
+    color: #6C1AEF;
+}
+
+/* Provocamos que el texto se desplace hacia la parte de arriba */
+.input-fill .input-label, select{
+    position: absolute;
+    top: 0px;
+    left: 28px;
+    line-height: 147.6%;
+    color: #848F9A;
+    transition: top .2s;
+    font-weight: 700;
+}
+
+/* Modificamos los icons para moverlos a la parte de arriba */
+.input-fill i{
+    position: absolute;
+    top: 22px;
+    left: -2px;
+    color: #848F9A;
+    font-size: 1.2rem;
+}
+
+/* Darle estilos al enlace */
+.login-form a{
+    /* Con estos primeras clases asignamos la posicion del texto */
+    display: block;
+    width: 100%;
+    text-align: right;
+    text-decoration: none;
+    color: #848F9A;
+    margin-bottom: 1.3rem; /* Para separarse el boton */
+    margin-top: 6.3rem;
+    font-weight: 800;
+    transition: .3s ease-in-out all;
+    font-size: 14px;
+}
+
+/* Efectos al interactuar */
+.login-form a:hover{
+    color: #6C1AEF;
+}
+
+.login-form .btn-login{
+    border-radius: 3rem;
+    width: 45%;
+    border: 1px solid #6C1AEF;
+    line-height: 1.6rem;/* Para que crezca de tamaño */
+    background-color: #6C1AEF;
+    color: #fff;
+    padding: 0.5rem 0;
+    transition: .3s ease-in-out;
+    font-weight: 500;
+}
+
+.login-form .btn-login:hover{
+    cursor: pointer;
+    background-color: #fff;
+    color: #6C1AEF;
+}
